@@ -113,6 +113,7 @@ var model = {
 var viewModel = {
     init: function(){
 
+
     }
 
 };
@@ -122,4 +123,4 @@ var view = {
 };
 
 // Activates knockout.js
-ko.applyBindings(new viewModel());
+ko.applyBindings(viewModel);
