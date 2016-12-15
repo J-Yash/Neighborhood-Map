@@ -112,36 +112,44 @@ var model = {
 
 var viewModel = {
     init: function(){
-        window.alert("Viewmodel");
-        function mapSuccess() {
-        var uluru = {lat: 19.066249, lng: 72.826172};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15,
-            center: uluru
-        });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
-        });
-    }
+        console.log("viewmodel has been initialized");
+        viewModel.mapsAPIInitialize();
 
-    //function mapError() {
-       // window.alert("Sorry!The Maps API failed to load. Check your firewall settings and internet connection.")
-    //}
+    },
 
-        $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4sTmzH3JV8wMKjD45KkjtgYjZFZilxS0&callback=mapSuccess" )
+    mapsAPIInitialize: function(){
+        console.log("mapsAPIInitialize()function call");
+        $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4sTmzH3JV8wMKjD45KkjtgYjZFZilxS0" )
       .done(function( script, textStatus ) {
-        mapSuccess();
+        mapView.mapInit();
       })
       .fail(function( jqxhr, settings, exception ) {
-        window.alert("error loading the maps API");
-    });
-
-    }
+        window.alert("error loading the maps API.");
+        });
+    },
 
 };
 
-var view = {
+var mapView = {
+
+    mapInit: function(){
+        console.log("mapInit function call");
+        var location = {lat: 19.066249, lng: 72.826172};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: location
+        });
+        mapView.markerRender(map, location);
+
+    },
+
+    markerRender: function(map, location){
+        console.log("markerRender function call");
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    },
 
 };
 
