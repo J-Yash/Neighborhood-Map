@@ -111,6 +111,9 @@ var model = {
 };
 
 var viewModel = {
+    init: function(){
+
+    }
 
 };
 
