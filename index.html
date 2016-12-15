@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Neighborhood Map</title>
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+        <link rel="stylesheet" type="text/javascript" href="bootstrap.min.js">
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="searchbar">
+
+            </div>
+            <div class="list" id="list">
+                <table>
+                    <tbody data-bind="foreach: listItems">
+                        <tr>
+                            <td data-bind="text: items"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="map" id="map" style="width:1000px; height: 800px">
+
+            </div>
+        </div>
+    </body>
+
+    <script src="app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+    <script>
+        function mapSuccess() {
+        var uluru = {lat: 19.066249, lng: 72.826172};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+
+    function mapError() {
+        window.alert("Sorry!The Maps API failed to load. Check your firewall settings and internet connection.")
+    }
+
+        $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4sTmzH3JV8wMKjD45KkjtgYjZFZilxS0&callback=mapSuccess" )
+      .done(function( script, textStatus ) {
+        mapSuccess();
+      })
+      .fail(function( jqxhr, settings, exception ) {
+        window.alert("error");
+    });
+    </script>
+</html>
