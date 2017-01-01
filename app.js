@@ -189,13 +189,21 @@ var viewModel = {
 
                 lat = item.latitude;
                 lon = item.longitude;
+                console.log("listAnimate lat"+lat);
+                console.log("listAnimate lon"+lon);
+                console.log("listAnimate length"+viewModel.placesshown().length);
 
-                for(var i=0; i< viewModel.marker.length; i++){
+
+                google.maps.event.trigger(item, 'click');
+
+                /*for(var i=0; i< viewModel.placesshown().length; i++){
                     if(viewModel.marker[i].position.lat  === lat &  viewModel.marker[i].position.lng === lon)
                     {
-                        google.maps.event.trigger(viewModel.marker[i], viewModel.marker[i].setAnimation(google.maps.Animation.BOUNCE));
+                        console.log("listAnimate lat"+viewModel.marker[i].position.lat);
+                        console.log("listAnimate lon"+viewModel.marker[i].position.lng);
+                        google.maps.event.trigger(viewModel.marker[i], 'click');
                     }
-                }
+                }*/
     }
 
 };
