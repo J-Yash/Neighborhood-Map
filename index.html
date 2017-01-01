@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Neighborhood Map</title>
+
         <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
         <link rel="stylesheet" type="text/javascript" href="bootstrap.min.js">
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -11,14 +12,15 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div class="searchbar">
-
+            <div class="search">
+                <input type="text" class="searchbar" id="searchbar" placeholder="Search" data-bind="textInput: query"></input>
             </div>
             <div class="list" id="list">
                 <table>
-                    <tbody>
+
+                    <tbody data-bind="foreach: viewModel.placesshown, click: listAnimate">
                         <tr>
-                            <td></td>
+                            <td data-bind="text: name"></td>
                         </tr>
                     </tbody>
                 </table>

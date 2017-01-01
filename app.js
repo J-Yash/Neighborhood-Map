@@ -1,4 +1,5 @@
 var model = {
+    placesActive: null,
     places : [
         {
             latitude: 19.072391,
@@ -114,6 +115,8 @@ var viewModel = {
     init: function(){
         console.log("viewmodel has been initialized");
         viewModel.mapsAPIInitialize();
+        viewModel.placesInitialize();
+
 
     },
 
@@ -121,37 +124,155 @@ var viewModel = {
         console.log("mapsAPIInitialize()function call");
         $.getScript( "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4sTmzH3JV8wMKjD45KkjtgYjZFZilxS0" )
       .done(function( script, textStatus ) {
-        mapView.mapInit();
+
+        mapView.markerRender();
+        viewModel.search('');
       })
       .fail(function( jqxhr, settings, exception ) {
         window.alert("error loading the maps API.");
         });
     },
 
+    placesInitialize: function(){
+        console.log("placesInitialize function call");
+        model.placesActive = model.places;
+        console.log(model.placesActive);
+
+        //listView.init(model.placesActive);
+
+    },
+
+    getPlaces : function(){
+        console.log("getPlaces function called");
+        return model.places;
+
+    },
+
+
+    placesshown: ko.observableArray(),
+
+    query: ko.observable(''),
+
+    marker: [],
+
+    search: function(value){
+        console.log("search function called"+value);
+        /*if(viewModel.query() === '')
+        {
+            viewModel.placesshown.removeAll();
+
+        for(var x in model.places) {
+
+            viewModel.placesshown.push(model.places[x]);
+
+            }
+        }
+        else{
+*/
+        viewModel.placesshown.removeAll();
+
+        for(var x in model.places) {
+        if(model.places[x].name.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+        viewModel.placesshown.push(model.places[x]);
+                }
+            }
+        //
+        mapView.markerRender();
+        //mapView.listAnimate();
+        //}
+    },
+
+    listAnimate: function(){
+                console.log("listAnimate function call");
+
+                var places = viewModel.placesshown();
+        for(var i = 0; i < places.length;i++)
+        {
+            viewModel.placesshown[i].addListener('click', (function(i){
+                return function(){
+                    if (viewModel.marker[i].getAnimation() !== null) {
+          viewModel.marker[i].setAnimation(null);
+        } else {
+          viewModel.marker[i].setAnimation(google.maps.Animation.BOUNCE);
+          setTimeout(function(){ viewModel.marker[i].setAnimation(null); }, 750);
+
+        }
+                }
+            })(i));
+
+        }
+
+    }
+
 };
+
+var listitems = function(){
+    console.log("listitems function called");
+
+    model.placesshown.forEach(function(place){
+
+        viewModel.placesshown.push(new listitems(place));
+    });
+};
+
+viewModel.query.subscribe(viewModel.search);
 
 var mapView = {
 
     mapInit: function(){
         console.log("mapInit function call");
+
+    },
+
+    markerRender: function(){
+        console.log("markerRender function call");
         var location = {lat: 19.066249, lng: 72.826172};
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
             center: location
         });
-        mapView.markerRender(map, location);
+        var places = viewModel.placesshown();
+        //var marker = [];
+        for(var i = 0; i < places.length;i++)
+        {
+                viewModel.marker[i] = new google.maps.Marker({
+                position: {lat: places[i].latitude, lng: places[i].longitude},
+                map: map,
+                animation: google.maps.Animation.DROP,
+            });
+
+            viewModel.marker[i].addListener('click', (function(i){
+                return function(){
+                    if (viewModel.marker[i].getAnimation() !== null) {
+          viewModel.marker[i].setAnimation(null);
+        } else {
+          viewModel.marker[i].setAnimation(google.maps.Animation.BOUNCE);
+          setTimeout(function(){ viewModel.marker[i].setAnimation(null); }, 750);
+
+        }
+                }
+            })(i));
+
+        }
 
     },
 
-    markerRender: function(map, location){
-        console.log("markerRender function call");
-        var marker = new google.maps.Marker({
-            position: location,
-            map: map
-        });
-    },
+
 
 };
+
+/*var toggleBounce = function(i) {
+    if (viewModel.marker[i].getAnimation() !== null) {
+          viewModel.marker[i].setAnimation(null);
+        } else {
+          viewModel.marker[i].setAnimation(google.maps.Animation.BOUNCE);
+        }
+};*/
+
+var listView = {
+
+};
+
 
 // Initialization
 ko.applyBindings(viewModel);
