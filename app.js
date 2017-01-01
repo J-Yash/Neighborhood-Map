@@ -182,25 +182,23 @@ var viewModel = {
         //}
     },
 
-    listAnimate: function(){
+    listAnimate: function(item){
                 console.log("listAnimate function call");
 
-                var places = viewModel.placesshown();
-        for(var i = 0; i < places.length;i++)
-        {
-            viewModel.placesshown[i].addListener('click', (function(i){
-                return function(){
-                    if (viewModel.marker[i].getAnimation() !== null) {
-          viewModel.marker[i].setAnimation(null);
-        } else {
-          viewModel.marker[i].setAnimation(google.maps.Animation.BOUNCE);
-          setTimeout(function(){ viewModel.marker[i].setAnimation(null); }, 750);
+                //var places = viewModel.placesshown();
 
-        }
+                lat = item.latitude;
+                lon = item.longitude;
+
+                for(var i=0; i< viewModel.marker.length; i++){
+                    if(viewModel.marker[i].position.lat  === lat &  viewModel.marker[i].position.lng === lon)
+                    {
+                        google.maps.event.trigger(viewModel.marker[i], viewModel.marker[i].setAnimation(google.maps.Animation.BOUNCE));
+                    }
                 }
-            })(i));
 
-        }
+
+
 
     }
 

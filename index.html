@@ -18,9 +18,9 @@
             <div class="list" id="list">
                 <table>
 
-                    <tbody data-bind="foreach: viewModel.placesshown, click: listAnimate">
+                    <tbody data-bind="foreach: viewModel.placesshown">
                         <tr>
-                            <td data-bind="text: name"></td>
+                            <td data-bind="text: name, click: $parent.listAnimate"></td>
                         </tr>
                     </tbody>
                 </table>
