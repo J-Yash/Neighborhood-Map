@@ -196,10 +196,6 @@ var viewModel = {
                         google.maps.event.trigger(viewModel.marker[i], viewModel.marker[i].setAnimation(google.maps.Animation.BOUNCE));
                     }
                 }
-
-
-
-
     }
 
 };
