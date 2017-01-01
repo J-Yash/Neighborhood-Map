@@ -189,21 +189,33 @@ var viewModel = {
 
                 lat = item.latitude;
                 lon = item.longitude;
-                console.log("listAnimate lat"+lat);
-                console.log("listAnimate lon"+lon);
-                console.log("listAnimate length"+viewModel.placesshown().length);
+                //console.log("listAnimate lat"+lat);
+                //console.log("listAnimate lon"+lon);
+                //console.log("listAnimate length"+viewModel.placesshown().length);
+                //console.log("listAnimate length"+viewModel.marker.length);
+                //console.log("listAnimate item"+item);
+                console.log("listAnimate item props "+item.latitude);
+                console.log("listAnimate item props "+item.longitude);
+                //console.log("listAnimate places props "+viewModel.placesshown()[1].latitude);
+                //console.log("listAnimate places props "+viewModel.placesshown()[1].longitude);
+                //console.log("listAnimate marker props "+viewModel.marker[2].position.lat());
+                //console.log("listAnimate marker props "+viewModel.marker[2].position.lng());
 
 
-                google.maps.event.trigger(item, 'click');
 
-                /*for(var i=0; i< viewModel.placesshown().length; i++){
-                    if(viewModel.marker[i].position.lat  === lat &  viewModel.marker[i].position.lng === lon)
+
+                //google.maps.event.trigger(viewModel.marker, 'click');
+
+                for(var i=0; i< viewModel.marker.length; i++){
+                    if(viewModel.marker[i].position.lat()  === lat && viewModel.marker[i].position.lng() === lon)
                     {
-                        console.log("listAnimate lat"+viewModel.marker[i].position.lat);
-                        console.log("listAnimate lon"+viewModel.marker[i].position.lng);
+                        console.log("listAnimate lat"+viewModel.marker[i].position.lat());
+                        console.log("listAnimate lon"+viewModel.marker[i].position.lng());
                         google.maps.event.trigger(viewModel.marker[i], 'click');
+                        break;
                     }
-                }*/
+
+                }
     }
 
 };
