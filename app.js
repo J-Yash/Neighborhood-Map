@@ -285,9 +285,23 @@ var mapView = {
 
         }
 
+        var list_of_id = [];
+
+        for(var i=0; i<places.length; i++){
+            list_of_id[i] = places[i].id;
+            console.log("id list"+places[i].id);
+        }
+
+        for(var i=0; i<viewModel.marker.length;i++){
+            if($.inArray(i,list_of_id) === -1)
+            {
+                viewModel.marker[i].setVisible(false);
+            }
+        }
+
 //---------Code for setting marker visibility-------------------
 
-       for(var i=0; i<model.places.length;i++)
+       /*for(var i=0; i<model.places.length;i++)
         {
             //console.log("ID: " + viewModel.placesshown()[i].id);
             if(viewModel.placesshown()[i].id === i)
@@ -298,7 +312,7 @@ var mapView = {
             {
                 viewModel.marker[i].setVisible(false);
             }
-        }
+        }*/
 
     },
 
