@@ -7,6 +7,7 @@ var model = {
             name: 'Nemo\'s Pastry Palace',
             category: 'Bakery',
             rating: '5',
+            id: 0,
         },
         {
             latitude: 19.072391,
@@ -14,6 +15,7 @@ var model = {
             name: 'Spidey Burger Shack',
             category: 'Restaurant',
             rating: '4.5',
+            id: 1,
         },
         {
             latitude: 19.071885,
@@ -21,6 +23,7 @@ var model = {
             name: 'Hulk Tacos',
             category: 'Restaurant',
             rating: '4',
+            id: 2,
         },
         {
             latitude: 19.070655,
@@ -28,6 +31,7 @@ var model = {
             name: 'Thor Coffee House',
             category: 'Bakery',
             rating: '4',
+            id: 3,
         },
         {
             latitude: 19.069787,
@@ -35,6 +39,7 @@ var model = {
             name: 'Hawkeye Bowling Alley',
             category: 'Entertainment',
             rating: '3.5',
+            id: 4,
         },
         {
             latitude: 19.067037,
@@ -42,6 +47,7 @@ var model = {
             name: 'IronMan\'s Motor Repair Shop',
             category: 'Car Repair',
             rating: '3',
+            id: 5,
         },
         {
             latitude: 19.067544,
@@ -49,6 +55,7 @@ var model = {
             name: 'Groot DJ House',
             category: 'Entertainment',
             rating: '4',
+            id: 6,
         },
         {
             latitude: 19.063669,
@@ -56,6 +63,7 @@ var model = {
             name: 'Flash Jogger\'s Park',
             category: 'Fitness',
             rating: '4.5',
+            id: 7,
         },
         {
             latitude: 19.060799,
@@ -63,6 +71,7 @@ var model = {
             name: 'DeadPool Snooker House',
             category: 'Entertainment',
             rating: '5',
+            id: 8,
         },
         {
             latitude: 19.059738,
@@ -70,6 +79,7 @@ var model = {
             name: 'Archie Picture Place',
             category: 'Entertainment',
             rating: '4',
+            id: 9,
         },
         {
             latitude: 19.057543,
@@ -77,6 +87,7 @@ var model = {
             name: 'Captain\'s Memorial',
             category: 'Entertainment',
             rating: '3',
+            id: 10,
         },
         {
             latitude: 19.059738,
@@ -84,6 +95,7 @@ var model = {
             name: 'Thanos Jewels',
             category: 'Shopping',
             rating: '2.5',
+            id: 11,
         },
         {
             latitude: 19.055613,
@@ -91,6 +103,7 @@ var model = {
             name: 'Batman Gadget Shack',
             category: 'Shopping',
             rating: '5',
+            id: 12,
         },
         {
             latitude: 19.055758,
@@ -98,6 +111,7 @@ var model = {
             name: 'Superman Gym',
             category: 'Fitness',
             rating: '3.5',
+            id: 13,
         },
         {
             latitude: 19.058580,
@@ -105,6 +119,7 @@ var model = {
             name: 'Xavier Pizza Paradise',
             category: 'Restaurant',
             rating: '3.5',
+            id: 14,
         },
 
     ]
@@ -189,6 +204,7 @@ var viewModel = {
 
                 lat = item.latitude;
                 lon = item.longitude;
+                id = item.id;
                 //console.log("listAnimate lat"+lat);
                 //console.log("listAnimate lon"+lon);
                 //console.log("listAnimate length"+viewModel.placesshown().length);
@@ -206,17 +222,17 @@ var viewModel = {
 
                 //google.maps.event.trigger(viewModel.marker, 'click');
 
-                for(var i=0; i< viewModel.marker.length; i++){
-                    if(viewModel.marker[i].position.lat()  === lat && viewModel.marker[i].position.lng() === lon)
-                    {
-                        console.log("listAnimate lat"+viewModel.marker[i].position.lat());
-                        console.log("listAnimate lon"+viewModel.marker[i].position.lng());
-                        google.maps.event.trigger(viewModel.marker[i], 'click');
-                        break;
-                    }
+                //for(var i=0; i< viewModel.marker.length; i++){
+                   // if(viewModel.marker[i].position.lat()  === lat && viewModel.marker[i].position.lng() === lon)
+                  //  {
+                   //     console.log("listAnimate lat"+viewModel.marker[i].position.lat());
+                   //     console.log("listAnimate lon"+viewModel.marker[i].position.lng());
+                        google.maps.event.trigger(viewModel.marker[id], 'click');
+                    //    break;
+                    //}
 
-                }
-    }
+               // }
+    },
 
 };
 
@@ -247,10 +263,10 @@ var mapView = {
         });
         var places = viewModel.placesshown();
         //var marker = [];
-        for(var i = 0; i < places.length;i++)
+        for(var i = 0; i < model.places.length;i++)
         {
                 viewModel.marker[i] = new google.maps.Marker({
-                position: {lat: places[i].latitude, lng: places[i].longitude},
+                position: {lat: model.places[i].latitude, lng: model.places[i].longitude},
                 map: map,
                 animation: google.maps.Animation.DROP,
             });
@@ -267,6 +283,21 @@ var mapView = {
                 }
             })(i));
 
+        }
+
+//---------Code for setting marker visibility-------------------
+
+       for(var i=0; i<model.places.length;i++)
+        {
+            //console.log("ID: " + viewModel.placesshown()[i].id);
+            if(viewModel.placesshown()[i].id === i)
+            {
+                viewModel.marker[i].setVisible(true);
+            }
+            else
+            {
+                viewModel.marker[i].setVisible(false);
+            }
         }
 
     },
