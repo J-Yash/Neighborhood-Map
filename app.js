@@ -231,7 +231,7 @@ var mapView = {
 
 var getWikiInfo = function(place){
     console.log("Wiki function call"+place.name);
-     wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + place.name + '&format=json&callback=wikiCallback';
+     wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + place.name + '&prop=pageimages&format=json&callback=wikiCallback';
 
             $.ajax({
             url: wikiUrl,
