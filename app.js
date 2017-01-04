@@ -111,7 +111,6 @@ var viewModel = {
         model.placesActive = model.places;
         console.log(model.placesActive);
 
-        //listView.init(model.placesActive);
 
     },
 
@@ -130,18 +129,7 @@ var viewModel = {
 
     search: function(value){
         console.log("search function called"+value);
-        /*if(viewModel.query() === '')
-        {
-            viewModel.placesshown.removeAll();
 
-        for(var x in model.places) {
-
-            viewModel.placesshown.push(model.places[x]);
-
-            }
-        }
-        else{
-*/
         viewModel.placesshown.removeAll();
 
         for(var x in model.places) {
@@ -149,49 +137,22 @@ var viewModel = {
         viewModel.placesshown.push(model.places[x]);
                 }
             }
-        //
         mapView.markerRender();
-        //mapView.listAnimate();
-        //}
+
     },
 
     listAnimate: function(item){
                 console.log("listAnimate function call");
 
-                //var places = viewModel.placesshown();
-
                 lat = item.latitude;
                 lon = item.longitude;
                 id = item.id;
-                //console.log("listAnimate lat"+lat);
-                //console.log("listAnimate lon"+lon);
-                //console.log("listAnimate length"+viewModel.placesshown().length);
-                //console.log("listAnimate length"+viewModel.marker.length);
-                //console.log("listAnimate item"+item);
+
                 console.log("listAnimate item props "+item.latitude);
                 console.log("listAnimate item props "+item.longitude);
-                //console.log("listAnimate places props "+viewModel.placesshown()[1].latitude);
-                //console.log("listAnimate places props "+viewModel.placesshown()[1].longitude);
-                //console.log("listAnimate marker props "+viewModel.marker[2].position.lat());
-                //console.log("listAnimate marker props "+viewModel.marker[2].position.lng());
 
-
-
-
-                //google.maps.event.trigger(viewModel.marker, 'click');
-
-                //for(var i=0; i< viewModel.marker.length; i++){
-                   // if(viewModel.marker[i].position.lat()  === lat && viewModel.marker[i].position.lng() === lon)
-                  //  {
-                   //     console.log("listAnimate lat"+viewModel.marker[i].position.lat());
-                   //     console.log("listAnimate lon"+viewModel.marker[i].position.lng());
                         google.maps.event.trigger(viewModel.marker[id], 'click');
-                    //    break;
-                    //}
-
-               // }
     },
-
 };
 
 var listitems = function(){
@@ -221,10 +182,7 @@ var mapView = {
         });
         var places = viewModel.placesshown();
 
-
-
         var infowindow = new google.maps.InfoWindow();
-        //var marker = [];
 
         for(var i = 0; i < model.places.length;i++)
         {
@@ -268,21 +226,6 @@ var mapView = {
             }
         }
 
-//---------Code for setting marker visibility-------------------
-
-       /*for(var i=0; i<model.places.length;i++)
-        {
-            //console.log("ID: " + viewModel.placesshown()[i].id);
-            if(viewModel.placesshown()[i].id === i)
-            {
-                viewModel.marker[i].setVisible(true);
-            }
-            else
-            {
-                viewModel.marker[i].setVisible(false);
-            }
-        }*/
-
     },
     };
 
@@ -316,21 +259,6 @@ var getWikiInfo = function(place){
 
     });
 };
-
-
-
-/*var toggleBounce = function(i) {
-    if (viewModel.marker[i].getAnimation() !== null) {
-          viewModel.marker[i].setAnimation(null);
-        } else {
-          viewModel.marker[i].setAnimation(google.maps.Animation.BOUNCE);
-        }
-};*/
-
-var listView = {
-
-};
-
 
 // Initialization
 ko.applyBindings(viewModel);
