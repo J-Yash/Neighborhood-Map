@@ -2,124 +2,82 @@ var model = {
     placesActive: null,
     places : [
         {
-            latitude: 19.072391,
-            longitude: 72.821831,
-            name: 'Nemo\'s Pastry Palace',
-            category: 'Bakery',
-            rating: '5',
+            latitude: 19.330528,
+            longitude: 72.816043,
+            name:'Fort Bassein',
             id: 0,
         },
         {
-            latitude: 19.072391,
-            longitude: 72.823643,
-            name: 'Spidey Burger Shack',
-            category: 'Restaurant',
-            rating: '4.5',
+            latitude: 19.008233,
+            longitude: 73.041062,
+            name:'Belapur Fort',
             id: 1,
         },
         {
-            latitude: 19.071885,
-            longitude: 72.828364,
-            name: 'Hulk Tacos',
-            category: 'Restaurant',
-            rating: '4',
+            latitude: 18.931495,
+            longitude: 72.838485,
+            name:'Bombay Castle',
             id: 2,
         },
         {
-            latitude: 19.070655,
-            longitude: 72.831324,
-            name: 'Thor Coffee House',
-            category: 'Bakery',
-            rating: '4',
+            latitude: 19.041800,
+            longitude: 72.819084,
+            name:'Castella de Aguada',
             id: 3,
         },
         {
-            latitude: 19.069787,
-            longitude: 72.825123,
-            name: 'Hawkeye Bowling Alley',
-            category: 'Entertainment',
-            rating: '3.5',
+            latitude: 18.941196,
+            longitude: 72.838822,
+            name:'Fort George Bombay',
             id: 4,
         },
         {
-            latitude: 19.067037,
-            longitude: 72.832115,
-            name: 'IronMan\'s Motor Repair Shop',
-            category: 'Car Repair',
-            rating: '3',
+            latitude: 19.296126,
+            longitude: 72.888794,
+            name:'Ghodbunder Fort',
             id: 5,
         },
         {
-            latitude: 19.067544,
-            longitude: 72.820989,
-            name: 'Groot DJ House',
-            category: 'Entertainment',
-            rating: '4',
+            latitude: 19.132292,
+            longitude: 72.795132,
+            name:'Madh Fort',
             id: 6,
         },
         {
-            latitude: 19.063669,
-            longitude: 72.825852,
-            name: 'Flash Jogger\'s Park',
-            category: 'Fitness',
-            rating: '4.5',
+            latitude: 19.042064,
+            longitude: 72.838538,
+            name:'Mahim Fort',
             id: 7,
         },
         {
-            latitude: 19.060799,
-            longitude: 72.832257,
-            name: 'DeadPool Snooker House',
-            category: 'Entertainment',
-            rating: '5',
+            latitude: 18.965643,
+            longitude: 72.843186,
+            name:'Mazagon Fort',
             id: 8,
         },
         {
-            latitude: 19.059738,
-            longitude: 72.823657,
-            name: 'Archie Picture Place',
-            category: 'Entertainment',
-            rating: '4',
+            latitude: 19.047013,
+            longitude: 72.865019,
+            name:'Riwa Fort',
             id: 9,
         },
         {
-            latitude: 19.057543,
-            longitude: 72.831108,
-            name: 'Captain\'s Memorial',
-            category: 'Entertainment',
-            rating: '3',
+            latitude: 19.000658,
+            longitude: 72.860534,
+            name:'Sewri Fort',
             id: 10,
         },
         {
-            latitude: 19.059738,
-            longitude: 72.835012,
-            name: 'Thanos Jewels',
-            category: 'Shopping',
-            rating: '2.5',
+            latitude: 19.046554,
+            longitude: 72.877994,
+            name:'Sion Hillock Fort',
             id: 11,
         },
         {
-            latitude: 19.055613,
-            longitude: 72.826056,
-            name: 'Batman Gadget Shack',
-            category: 'Shopping',
-            rating: '5',
+            latitude: 19.023695,
+            longitude: 72.817320,
+            name:'Worli Fort',
             id: 12,
-        },
-        {
-            latitude: 19.055758,
-            longitude: 72.836850,
-            name: 'Superman Gym',
-            category: 'Fitness',
-            rating: '3.5',
-            id: 13,
-        },
-        {
-            latitude: 19.058580,
-            longitude: 72.827944,
-            name: 'Xavier Pizza Paradise',
-            category: 'Restaurant',
-            rating: '3.5',
-            id: 14,
         },
 
     ]
@@ -256,20 +214,28 @@ var mapView = {
 
     markerRender: function(){
         console.log("markerRender function call");
-        var location = {lat: 19.066249, lng: 72.826172};
+        var location = {lat: 19.137680, lng: 72.826172};
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15,
+            zoom: 11,
             center: location
         });
         var places = viewModel.placesshown();
+
+
+
+        var infowindow = new google.maps.InfoWindow();
         //var marker = [];
+
         for(var i = 0; i < model.places.length;i++)
         {
+
+
                 viewModel.marker[i] = new google.maps.Marker({
                 position: {lat: model.places[i].latitude, lng: model.places[i].longitude},
                 map: map,
                 animation: google.maps.Animation.DROP,
             });
+
 
             viewModel.marker[i].addListener('click', (function(i){
                 return function(){
@@ -277,6 +243,9 @@ var mapView = {
           viewModel.marker[i].setAnimation(null);
         } else {
           viewModel.marker[i].setAnimation(google.maps.Animation.BOUNCE);
+          infowindow.setContent(model.places[i].name);
+          infowindow.open(map, viewModel.marker[i]);
+          getWikiInfo(model.places[i]);
           setTimeout(function(){ viewModel.marker[i].setAnimation(null); }, 750);
 
         }
@@ -289,7 +258,7 @@ var mapView = {
 
         for(var i=0; i<places.length; i++){
             list_of_id[i] = places[i].id;
-            console.log("id list"+places[i].id);
+            //console.log("id list"+places[i].id);
         }
 
         for(var i=0; i<viewModel.marker.length;i++){
@@ -315,10 +284,40 @@ var mapView = {
         }*/
 
     },
+    };
 
+var getWikiInfo = function(place){
+    console.log("Wiki function call"+place.name);
+     wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + place.name + '&format=json&callback=wikiCallback';
 
+            $.ajax({
+            url: wikiUrl,
+            dataType:'jsonp',
+            success: function(response) {
+                var articleList = response;
+                $('.wiki h3').text(articleList[0]);
+                $('.wiki p').text(articleList[2][0]);
+                $('.wiki b').text(articleList[3][0]);
+                $('.wiki a').attr("href",articleList[3][0]);
+                console.log(articleList);
+                console.log(articleList[0]);
+                console.log(articleList[2][0]);
+                console.log(articleList[3][0]);
+                /*for (var i = 0; i < articleList.length; i++) {
+                    articleStr = articleList[i];
+                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                    self.wikiText('<li><a href="' + url + '">' + articleStr + '</a></li>');
 
+                    //$wikiContent.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+                    clearTimeout(wikiRequestTimeout);
+                }
+                */
+            }
+
+    });
 };
+
+
 
 /*var toggleBounce = function(i) {
     if (viewModel.marker[i].getAnimation() !== null) {
