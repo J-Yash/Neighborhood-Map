@@ -4,40 +4,39 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Neighborhood Map</title>
-
         <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
         <link rel="stylesheet" type="text/javascript" href="bootstrap.min.js">
         <link rel="stylesheet" type="text/css" href="style.css">
-
     </head>
     <body>
         <div class="container-fluid">
-            <div class="search">
-                <input type="text" class="searchbar" id="searchbar" placeholder="Search" data-bind="textInput: query"></input>
+            <div class="row">
+                <div class="col-md-12" id="header">
+                    <center><h1>Forts Of Mumbai</h1></center>
+                </div>
             </div>
-            <div class="list" id="list">
-                <table>
-
+            <div class="row">
+            <div class="listbar col-md-2" id="listbar">
+                <input type="text" class="searchbar form-control" id="searchbar" placeholder="Search" data-bind="textInput: query"></input>
+                <table class="table table-hover">
                     <tbody data-bind="foreach: viewModel.placesshown">
-                        <tr>
+                        <tr class="info">
                             <td data-bind="text: name, click: $parent.listAnimate"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="map" id="map" style="width:1000px; height: 800px">
-
+            <div class="map col-md-8" id="map" style="height: 800px">
             </div>
-            <div class="wiki" id="wiki" style="width:500px; height: 1000px;">
-                <h3></h3><br>
+            <div class="wiki col-md-2 bg-info" id="wiki" style="height: 800px;">
+                <center><h3></h3></center><br>
                 <p></p><br>
-                <a href=""><b></b></a>
-
+                <a href=""><b></b></a><br><br>
+                <cite></cite>
             </div>
         </div>
+        </div>
     </body>
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
     <script src="app.js"></script>

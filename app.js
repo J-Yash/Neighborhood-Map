@@ -110,14 +110,11 @@ var viewModel = {
         console.log("placesInitialize function call");
         model.placesActive = model.places;
         console.log(model.placesActive);
-
-
     },
 
     getPlaces : function(){
         console.log("getPlaces function called");
         return model.places;
-
     },
 
 
@@ -138,7 +135,6 @@ var viewModel = {
                 }
             }
         mapView.markerRender();
-
     },
 
     listAnimate: function(item){
@@ -167,10 +163,8 @@ var listitems = function(){
 viewModel.query.subscribe(viewModel.search);
 
 var mapView = {
-
     mapInit: function(){
         console.log("mapInit function call");
-
     },
 
     markerRender: function(){
@@ -187,13 +181,11 @@ var mapView = {
         for(var i = 0; i < model.places.length;i++)
         {
 
-
                 viewModel.marker[i] = new google.maps.Marker({
                 position: {lat: model.places[i].latitude, lng: model.places[i].longitude},
                 map: map,
                 animation: google.maps.Animation.DROP,
             });
-
 
             viewModel.marker[i].addListener('click', (function(i){
                 return function(){
@@ -205,11 +197,9 @@ var mapView = {
           infowindow.open(map, viewModel.marker[i]);
           getWikiInfo(model.places[i]);
           setTimeout(function(){ viewModel.marker[i].setAnimation(null); }, 750);
-
         }
-                }
+        }
             })(i));
-
         }
 
         var list_of_id = [];
@@ -225,13 +215,12 @@ var mapView = {
                 viewModel.marker[i].setVisible(false);
             }
         }
-
     },
     };
 
 var getWikiInfo = function(place){
     console.log("Wiki function call"+place.name);
-     wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + place.name + '&prop=pageimages&format=json&callback=wikiCallback';
+     wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + place.name + '&prop=images&format=json&callback=wikiCallback';
 
             $.ajax({
             url: wikiUrl,
@@ -242,22 +231,14 @@ var getWikiInfo = function(place){
                 $('.wiki p').text(articleList[2][0]);
                 $('.wiki b').text(articleList[3][0]);
                 $('.wiki a').attr("href",articleList[3][0]);
+                $('.wiki cite').text("This information is being displayed from Wikipedia.");
                 console.log(articleList);
                 console.log(articleList[0]);
                 console.log(articleList[2][0]);
                 console.log(articleList[3][0]);
-                /*for (var i = 0; i < articleList.length; i++) {
-                    articleStr = articleList[i];
-                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-                    self.wikiText('<li><a href="' + url + '">' + articleStr + '</a></li>');
 
-                    //$wikiContent.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
-                    clearTimeout(wikiRequestTimeout);
-                }
-                */
             }
-
-    });
+     });
 };
 
 // Initialization

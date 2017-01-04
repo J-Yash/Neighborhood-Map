@@ -1,0 +1,25 @@
+#header{
+    background-color: #b3daff;
+    border:solid #e6f3ff;
+    border-width: 5px;
+}
+
+#wiki{
+        border:solid #e6f3ff;
+    border-width: 5px;
+}
+
+#map{
+        border:solid #e6f3ff;
+    border-width: 5px;
+}
+#listbar{
+    margin-top: 10px;
+}
+
+#wiki h3{
+    font-weight: bold;
+}
+a {
+    word-wrap: break-word;
+}
