@@ -121,6 +121,10 @@ placesshown: ko.observableArray(),
 query: ko.observable(''),
 
 marker: [],
+
+wikiValue: ko.observable(''),
+
+
 //Function for search functionality
 search: function(value){
 
@@ -213,15 +217,8 @@ var getWikiInfo = function(place){
         dataType:'jsonp',
         success: function(response) {
             var articleList = response;
-            $('.wiki h3').text(articleList[0]);
-            $('.wiki p').text(articleList[2][0]);
-            $('.wiki b').text(articleList[3][0]);
-            $('.wiki a').attr("href",articleList[3][0]);
-            $('.wiki cite').text("This information is being displayed from Wikipedia.");
-            console.log(articleList);
-            console.log(articleList[0]);
-            console.log(articleList[2][0]);
-            console.log(articleList[3][0]);
+            var html = '<center><h3>'+articleList[0]+'</h3></center><br><p>'+articleList[2][0]+'</p><br><a href="'+articleList[3][0]+'"><b>'+articleList[3][0]+'</b></a><br><br><cite>This information is being displayed from Wikipedia.</cite>';
+            viewModel.wikiValue(html);
 
         }
     });

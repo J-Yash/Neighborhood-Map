@@ -6,10 +6,10 @@ It has additional functionality like a location filter based on name-based-searc
 Map is provided via Google Maps API
 
 ## Steps to run the app:
-  * Run a local server on your machine
+  * Make sure you have access to an active Internet Connection
   * Go to localhost in your browser
   * Run index.html
-  * Make sure you have access to an active Internet Connection
+  * Run a local server on your machine
 
 ## Resources Used:
   * Udacity Forums
