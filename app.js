@@ -89,8 +89,6 @@ var viewModel = {
 init: function(){
     viewModel.mapsAPIInitialize();
     viewModel.placesInitialize();
-
-
 },
 //Initialize Maps API asynchronously
 mapsAPIInitialize: function(){
@@ -193,20 +191,25 @@ viewModel.marker[i].addListener('click', (function(i){
   }
 })(i));
 }
-//Setting Marker visibility
-var list_of_id = [];
-
-for(var i=0; i<places.length; i++){
-    list_of_id[i] = places[i].id;
-}
-
-for(var i=0; i<viewModel.marker.length;i++){
-    if($.inArray(i,list_of_id) === -1)
-    {
-        viewModel.marker[i].setVisible(false);
-    }
-}
+mapView.markerVisibility();
 },
+//Setting Marker visibility
+markerVisibility: function(){
+    var list_of_id = [];
+    var places = viewModel.placesshown();
+    for(var i=0; i<places.length; i++){
+        list_of_id[i] = places[i].id;
+    }
+
+    for(var i=0; i<viewModel.marker.length;i++){
+        if($.inArray(i,list_of_id) === -1)
+        {
+            viewModel.marker[i].setVisible(false);
+        }
+    }
+},
+
+
 };
 //Wikipedia Ajax Call
 var getWikiInfo = function(place){
@@ -222,9 +225,9 @@ var getWikiInfo = function(place){
 
         },
         error: function(xhr, textStatus, errorThrown){
-       alert('Wikipedia request failed!');
-    }
-    });
+         alert('Wikipedia request failed!');
+     }
+ });
 };
 
 // Initialization
