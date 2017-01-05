@@ -220,7 +220,10 @@ var getWikiInfo = function(place){
             var html = '<center><h3>'+articleList[0]+'</h3></center><br><p>'+articleList[2][0]+'</p><br><a href="'+articleList[3][0]+'"><b>'+articleList[3][0]+'</b></a><br><br><cite>This information is being displayed from Wikipedia.</cite>';
             viewModel.wikiValue(html);
 
-        }
+        },
+        error: function(xhr, textStatus, errorThrown){
+       alert('Wikipedia request failed!');
+    }
     });
 };
 
