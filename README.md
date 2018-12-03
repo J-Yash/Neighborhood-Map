@@ -3,7 +3,9 @@
 A single page application featuring a map of Mumbai showing all the forts in Mumbai.
 
 It has additional functionality like a location filter based on name-based-search. Additional data is provided about all the forts via Wikipedia API.
-Map is provided via Google Maps API
+Map is provided via Google Maps API.
+
+Live Preview: https://j-yash.github.io/Neighborhood-Map/
 
 ## Steps to run the app:
   * Make sure you have access to an active Internet Connection
